@@ -7,3 +7,7 @@ Used the OpenWeatherMap API to build a weather app from scratch. I used the GeoC
 2. Added logic to the search function so that the user would be prompted to re-enter the cityif an invalid city was entered.
 3. Added unit logic - user can specify whether they want the results in imperial units or metric units.
 4. Added logic to the search function so that if the user searched without specifying the unit, they would be asked to select a unit.
+
+#third commit
+1. Added all the weather into to the page, everything works in terms of all the data showing up
+2. Made it responsive, but need to touch up the layout a bit

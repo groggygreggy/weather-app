@@ -8,24 +8,24 @@ html{
 }
 
 body{
-    background: rgb(174,194,238);
-    background: radial-gradient(circle, rgba(174,194,238,1) 0%, rgba(76,154,245,1) 100%);
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(166,166,166,1) 100%);
 }
 
 #container{
     margin: 5rem 10rem 5rem 10rem;
 }
 
-.flex{
+.flex-column:not(.info-box){
     display: flex;
     flex-direction: column;
+    row-gap: 1rem;
 }
 
-.flex-row{
+.flex{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    /* column-gap: 2rem; */
 }
 
 /* form, input, search button, unit selector */
@@ -35,17 +35,20 @@ form{
 
 #city{
     border: none;
-    margin: 0;
-    font-size: 4rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    font-size: 3rem;
     width: 50%;
-    background: transparent;
+    min-width: 36rem;
+    background: hsla(0, 0%, 100%, 0.1);
+    border-radius: 15px;
     color: white;
     font-family: 'Outfit';
 }
 
 #city:hover{
     transition: background 0.3s;
-    background: hsla(0, 0%, 100%, 0.1);
+    background: hsla(0, 0%, 100%, 0.2);
 }
 
 ::placeholder{
@@ -88,4 +91,56 @@ form{
 
 #paragraph{
     font-size: 2rem;
+}
+
+/* info */
+.info-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-box > *{
+    min-width: 40rem;
+    margin: 0;
+}
+
+#temperature{
+    font-size: 15rem;
+}
+
+#location{
+    font-size: 6rem;
+}
+
+#date, #time{
+    font-size: 4rem;
+}
+
+.side{
+    width: fit-content;
+}
+
+.side > p{
+    font-size: 3rem;
+}
+
+.space-between{
+    justify-content: space-between;
+}
+
+/* media query */
+@media(max-width: 500px){
+    #container{
+        margin: 5rem 2rem 5rem 2rem;
+    }
+
+    #city{
+        min-width: 30rem;
+    }
+
+    .info-box > *{
+        scale: 0.5;
+        /* align-self: flex-start;
+        justify-self: flex-start; */
+    }
 }

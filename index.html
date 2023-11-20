@@ -10,14 +10,14 @@
     <title>Weather App</title>
 </head>
 <body>
-    <div id="container" class="flex">
-        <form>
-            <div class="flex-row search-bar">
+    <div id="container" >
+        <form class="flex-column">
+            <div class="flex">
                 <input type="text" id="city" placeholder="Enter city here">
                 <button id="search">Search</button>
             </div>
 
-            <div id="unitSelector" class="flex-row">
+            <div id="unitSelector" class="flex">
                 <input type="radio" value="imperial" name="measurement" id="imperial" class="radio" >
                 <label for="imperial" class="radio-label">Fahrenheit</label>
                 <br>
@@ -27,7 +27,24 @@
                 <br>
             </div>
         </form>
+
         <p id="paragraph"></p> <!-- relocate this -->
+
+        <div class="flex space-between">
+            <div class="flex-column info-box">
+                <h1 id="temperature"></h1>
+                <h2 id="location"></h2>
+                <h3 id="time"></h3>
+                <h3 id="date"></h3>
+            </div>
+            <div class="flex-column info-box side">
+                <p id="desc"></p>
+                <p id="feels-like"></p>
+                <p id="wind-speed"></p>
+                <p id="precip"></p>
+            </div>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
