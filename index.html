@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Kumbh+Sans:wght@400;700&family=Montserrat:wght@500;700&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Weather App</title>
 </head>
 <body>
-    <p id="paragraph"></p>
-    <form>
-        <label for="city"></label>
-        <input type="text" id="city">
-        <button id="getbtn">GET</button>
-    </form>
+    <div id="container" class="flex">
+        <form>
+            <div class="flex-row search-bar">
+                <input type="text" id="city" placeholder="Enter city here">
+                <button id="search">Search</button>
+            </div>
+
+            <div id="unitSelector" class="flex-row">
+                <input type="radio" value="imperial" name="measurement" id="imperial" class="radio" >
+                <label for="imperial" class="radio-label">Fahrenheit</label>
+                <br>
+
+                <input type="radio" value="metric" name="measurement" id="metric" class="radio">
+                <label for="metric" class="radio-label">Celsius</label>
+                <br>
+            </div>
+        </form>
+        <p id="paragraph"></p> <!-- relocate this -->
+    </div>
 
     <script src="script.js"></script>
 </body>

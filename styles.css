@@ -1,0 +1,91 @@
+html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: 'Outfit', sans-serif;
+    color: white;
+}
+
+body{
+    background: rgb(174,194,238);
+    background: radial-gradient(circle, rgba(174,194,238,1) 0%, rgba(76,154,245,1) 100%);
+}
+
+#container{
+    margin: 5rem 10rem 5rem 10rem;
+}
+
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* column-gap: 2rem; */
+}
+
+/* form, input, search button, unit selector */
+form{
+    width: 100%;
+}
+
+#city{
+    border: none;
+    margin: 0;
+    font-size: 4rem;
+    width: 50%;
+    background: transparent;
+    color: white;
+    font-family: 'Outfit';
+}
+
+#city:hover{
+    transition: background 0.3s;
+    background: hsla(0, 0%, 100%, 0.1);
+}
+
+::placeholder{
+    color: white;
+}
+
+#search{
+    border: none;
+    cursor: pointer;
+    width: 12rem;
+    height: 6rem;
+    border-radius: 15px;
+    font-size: 3rem;
+    background-color: transparent;
+    font-family: 'Outfit';
+    color: white;
+}
+
+#search:hover{
+    transition: background 0.3s;
+    background: hsla(0, 0%, 100%, 0.2);
+}
+
+.radio{
+    display: none;
+}
+
+.radio-label{
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 8px 20px;
+    transition: background 0.3s;
+    border-radius: 15px;
+    margin-right: 2rem;
+}
+
+.radio:checked + .radio-label{
+    background: hsla(0, 0%, 100%, 0.5);
+}
+
+#paragraph{
+    font-size: 2rem;
+}
