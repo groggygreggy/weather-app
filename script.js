@@ -38,7 +38,7 @@ async function getCoord(city){
 }
 
 const displayCities = (latitude, longitude) => {
-    body.append(document.createElement('p').textContent = `latitude ${latitude}, longitude ${longitude}`);
+    body.append(document.createElement('p').textContent = `latitude ${latitude}, longitude ${longitude} `);
 }
 
 async function getWeather(){
