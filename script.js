@@ -6,7 +6,7 @@ const body = document.querySelector('body');
 let coord;
 let units;
 
-async function geoApi(city){
+async function getCoord(city){
     const geoURL = await `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
     const geoData = await fetch(geoURL);
     const geoResult = await geoData.json();
@@ -19,7 +19,12 @@ async function geoApi(city){
 
     //add logic here to be able to select which of the same name cities they want
     if (geoResult.length > 1){
-        console.log("more than one");
+        geoResult.forEach(city => {
+            const latitude = city.lat;
+            const longitude = city.lon;
+            displayCities(latitude, longitude);
+        })
+        return;
     }
     //
 
@@ -29,13 +34,17 @@ async function geoApi(city){
         coord.push(lat, lon);
     })
 
-    weather();
+    getWeather();
 }
 
-async function weather(){
+const displayCities = (latitude, longitude) => {
+    body.append(document.createElement('p').textContent = `latitude ${latitude}, longitude ${longitude}`);
+}
+
+async function getWeather(){
     console.log(coord);
     const apiURL = await `https://api.openweathermap.org/data/2.5/weather?lat=${coord[0]}&lon=${coord[1]}&appid=${apiKey}&units=${units}`;
-    console.log(units);
+    console.log(units, typeof units);
     const data = await fetch(apiURL);
     const result = await data.json();
     console.log(result);
@@ -49,14 +58,18 @@ async function weather(){
     }
 
     finally{
-        units = undefined;
+        // units = undefined;
     }
 
     // temperature
     if (units == 'metric'){
         document.querySelector('#temperature').textContent = `${result.main.temp}°C`;
+        document.querySelector('#feels-like').textContent = `Feels like: ${result.main.feels_like}°C`;
+        document.querySelector('#wind-speed').textContent = `Wind speed: ${result.wind.speed}m/s`;
     } else{
         document.querySelector('#temperature').textContent = `${result.main.temp}°F`;
+        document.querySelector('#feels-like').textContent = `Feels like: ${result.main.feels_like}°F`;
+        document.querySelector('#wind-speed').textContent = `Wind speed: ${result.wind.speed}mph`;
     }
 
     //location
@@ -107,18 +120,6 @@ async function weather(){
     // side info
     document.querySelector('#desc').textContent = `Description: ${result.weather[0].description}`;
 
-    if (units == 'metric'){
-        document.querySelector('#feels-like').textContent = `Feels like: ${result.main.feels_like}°C`;
-    } else{
-        document.querySelector('#feels-like').textContent = `Feels like: ${result.main.feels_like}°F`;
-    }
-
-    if (units == 'metric'){
-        document.querySelector('#wind-speed').textContent = `Wind speed: ${result.wind.speed}m/s`;
-    } else{
-        document.querySelector('#wind-speed').textContent = `Wind speed: ${result.wind.speed}mph`;
-    }
-
     document.querySelector('#humidity');
 }
 
@@ -127,7 +128,10 @@ form.addEventListener(("submit"), (e) => {
     coord = [];
     if(cityInput.value === ""){
         p.textContent = "Please enter a city";
-    } else if(document.getElementById('imperial').checked){
+        return;
+    };
+    
+    if(document.getElementById('imperial').checked){
         units = 'imperial';
     } else if(document.getElementById('metric').checked){
         units = 'metric';
@@ -135,17 +139,21 @@ form.addEventListener(("submit"), (e) => {
         p.textContent = "Please select a unit";
         return;
     }
-    geoApi(cityInput.value);
+    getCoord(cityInput.value);
 })
 
 const background = (temp) => {
-    if((units = 'metric' && temp <= 0) || (units = 'imperial' && temp <= 32)){
+    if((units == 'metric' && temp <= 0) || (units == 'imperial' && temp <= 32)){
+        console.log('freezing');
         body.style.background = 'radial-gradient(circle, rgba(174,194,238,1) 0%, rgba(76,154,245,1) 100%)';
-    } else if((units = 'metric' && 0 < temp <= 18.5) || (units = 'imperial' && 32< temp <= 65)){
+    } else if((units == 'metric' && 0 < temp <= 18.5) || (units == 'imperial' && 32< temp <= 65)){
+        console.log('freezing to 65f 18.5c');
         body.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(142,177,236,1) 100%)';
-    } else if((units = 'metric' && 18.5 < temp <= 32) || (units = 'imperial' && 65 < temp <= 90)){
+    } else if((units == 'metric' && 18.5 < temp <= 32) || (units == 'imperial' && 65 < temp <= 90)){
+        console.log('65f and 18c to 32c and 90f');
         body.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(233,131,47,1) 100%)';
-    } else if((units = 'metric' && 32 < temp) || (units = 'imperial' && 90 < temp )){
+    } else if((units == 'metric' && 32 < temp) || (units == 'imperial' && 90 < temp )){
+        console.log('32c+ and 90f+');
         body.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(250,71,71,1) 100%)';
     }
 }
